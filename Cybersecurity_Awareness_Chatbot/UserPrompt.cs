@@ -113,7 +113,7 @@ namespace Cybersecurity_Awareness_Chatbot
                 Thread.Sleep(delay);
             }
         }
-        //Method to return the user name
+        //Method to return the user name to be used across classes
         public string GetUserName()
         {
             //Returning the name of the user
