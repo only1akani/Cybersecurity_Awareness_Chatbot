@@ -9,7 +9,7 @@ namespace Cybersecurity_Awareness_Chatbot
 
         //Welcome the user
         public void ShowWelcomeMessage()
-        {
+        { 
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("==___==___==___==___==___==___==___==___==___==___==___==___==___==___==___==");
             Console.ForegroundColor = ConsoleColor.DarkBlue;
