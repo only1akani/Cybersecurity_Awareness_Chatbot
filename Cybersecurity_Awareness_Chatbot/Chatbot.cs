@@ -29,6 +29,7 @@ namespace Cybersecurity_Awareness_Chatbot
             answers.Add("Scam links:Be cautious with shortened URLs to avoid. Never click links in unsolicited SMS messages or email, they might be scam links");
             answers.Add("Phishing awareness:Phishing tricks you into revealing personal info. To reduce the chances of falling prey to attack phishing, phishing awareness is a powerful tool.");
             answers.Add("Safe browsing:Avoid public Wi-Fi for banking or sensitive logins also don't download files from untrusted or unfamiliar websites, just to be safe");
+            answers.Add("Two factor authentication: Always enable 2FA on your accounts for an extra layer of security beyond just a password.");
 
             //Storing words to ignore 
             ignoring.Add("a");
