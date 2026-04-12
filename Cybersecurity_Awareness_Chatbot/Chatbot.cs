@@ -108,6 +108,7 @@ namespace Cybersecurity_Awareness_Chatbot
             ignoring.Add("everything");
             ignoring.Add("everywhere");
             ignoring.Add("except");
+            ignoring.Add("explain");
             ignoring.Add("few");
             ignoring.Add("first");
             ignoring.Add("for");
@@ -115,6 +116,7 @@ namespace Cybersecurity_Awareness_Chatbot
             ignoring.Add("formerly");
             ignoring.Add("from");
             ignoring.Add("further");
+            ignoring.Add("give");
             ignoring.Add("had");
             ignoring.Add("has");
             ignoring.Add("have");
@@ -229,6 +231,7 @@ namespace Cybersecurity_Awareness_Chatbot
             ignoring.Add("still");
             ignoring.Add("such");
             ignoring.Add("take");
+            ignoring.Add("tell");
             ignoring.Add("than");
             ignoring.Add("that");
             ignoring.Add("the");
