@@ -392,7 +392,7 @@ namespace Cybersecurity_Awareness_Chatbot
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.Write("chatBot : ");
                     Console.ForegroundColor = ConsoleColor.Red;
-                    TypeWriter("I'm not sure about that. Try asking about passwords, phishing, scam links, safe browsing, or type exit when finished", 30);
+                    TypeWriter(" I'm not sure about that. Try asking about passwords, phishing, scam links, safe browsing, or two-factor authentication. Type exit when finished", 30);
                     Console.WriteLine();
                     Console.ResetColor();
                     Thread.Sleep(500);
