@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 
 namespace demo
 {//start of namespace
-
+    //Main window, handles all UI events and connects the separate classes
     public partial class MainWindow : Window
     {//start of class
 
