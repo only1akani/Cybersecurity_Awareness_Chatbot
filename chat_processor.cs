@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace demo
 {//start of namespace
+    //Processes user input and matches it to the correct chatbot response
     public class chat_processor
     {//start of class
 
