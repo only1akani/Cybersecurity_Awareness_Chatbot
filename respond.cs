@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 
 namespace demo
-{
+{//start of namespace
+    //Response library, stores all keywords and answers for the chatbot
     public class respond
-    {
+    {//start of class
         public respond( ArrayList reply  , ArrayList ignore  )
         {//start of constructor
 
