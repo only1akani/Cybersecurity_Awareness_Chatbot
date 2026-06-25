@@ -23,6 +23,9 @@ namespace demo
     public partial class MainWindow : Window
     {//start of class
 
+        //MySQL connection details
+        private const string MYSQL_PASSWORD = "Y@ndisa07_";
+
         //creating an instance for the class Array
         ArrayList reply = new ArrayList();
         ArrayList ignore = new ArrayList();
