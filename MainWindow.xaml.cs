@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 namespace demo
 {//start of namespace
     //Main window, handles all UI events and connects the separate classes
+    //contains task assistant , quiz manager, and activity log
     public partial class MainWindow : Window
     {//start of class
 
@@ -44,6 +45,15 @@ namespace demo
         string pre_question = string.Empty;
         int counting = 0;
 
+        //Part 3 fields
+        activity_log activityLog;
+        task_manager taskManager;
+        quiz_manager quizManager;
+
+        //Tracks whether we are in task add mode and waiting for task description input
+        bool _addingTask = false;
+        bool _awaitingTaskDesc = false;
+        string _pendingTaskTitle = "";
 
         public MainWindow()
         {
@@ -114,6 +124,165 @@ namespace demo
             question.Clear();
         }
 
+        //Tab navigation buttons (switch between panels inside chat_grid)
+        //Show the main chat panel
+        private void show_chat_panel(object sender, RoutedEventArgs e)
+        {
+            chat_panel.Visibility = Visibility.Visible;
+            task_panel.Visibility = Visibility.Hidden;
+            quiz_panel.Visibility = Visibility.Hidden;
+            log_panel.Visibility = Visibility.Hidden;
+        }
+
+        //Show the task assistant panel
+        private void show_task_panel(object sender, RoutedEventArgs e)
+        {
+            chat_panel.Visibility = Visibility.Hidden;
+            task_panel.Visibility = Visibility.Visible;
+            quiz_panel.Visibility = Visibility.Hidden;
+            log_panel.Visibility = Visibility.Hidden;
+
+            RefreshTaskList();
+        }
+
+        //Show the quiz panel
+        private void show_quiz_panel(object sender, RoutedEventArgs e)
+        {
+            chat_panel.Visibility = Visibility.Hidden;
+            task_panel.Visibility = Visibility.Hidden;
+            quiz_panel.Visibility = Visibility.Visible;
+            log_panel.Visibility = Visibility.Hidden;
+        }
+
+        //Show the activity log panel
+        private void show_log_panel(object sender, RoutedEventArgs e)
+        {
+            chat_panel.Visibility = Visibility.Hidden;
+            task_panel.Visibility = Visibility.Hidden;
+            quiz_panel.Visibility = Visibility.Hidden;
+            log_panel.Visibility = Visibility.Visible;
+
+            RefreshActivityLog();
+        }
+
+        //Task Assistant panel event handlers
+        //Add task button
+        private void add_task_btn(object sender, RoutedEventArgs e)
+        {
+            string title = task_title_input.Text.Trim();
+            string description = task_desc_input.Text.Trim();
+            string reminder = task_reminder_input.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                task_status_label.Content = "Please enter a task title.";
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(description))
+                description = title;
+
+            string result = taskManager.AddTask(title, description, reminder);
+            task_status_label.Content = result;
+
+            //Clear inputs
+            task_title_input.Clear();
+            task_desc_input.Clear();
+            task_reminder_input.Clear();
+
+            RefreshTaskList();
+        }
+
+        //Mark complete button
+        private void mark_complete_btn(object sender, RoutedEventArgs e)
+        {
+            if (tasks_listview.SelectedItem is CyberTask selected)
+            {
+                string result = taskManager.MarkCompleted(selected.Id);
+                task_status_label.Content = result;
+                RefreshTaskList();
+            }
+            else
+            {
+                task_status_label.Content = "Please select a task first.";
+            }
+        }
+
+        //Delete task button
+        private void delete_task_btn(object sender, RoutedEventArgs e)
+        {
+            if (tasks_listview.SelectedItem is CyberTask selected)
+            {
+                string result = taskManager.DeleteTask(selected.Id);
+                task_status_label.Content = result;
+                RefreshTaskList();
+            }
+            else
+            {
+                task_status_label.Content = "Please select a task to delete.";
+            }
+        }
+
+        //Refreshes the task list display
+        private void RefreshTaskList()
+        {
+            tasks_listview.ItemsSource = null;
+            tasks_listview.ItemsSource = taskManager.GetAllTasks();
+        }
+
+        //Quiz panel event handlers
+        //Start quiz button
+        private void start_quiz_btn(object sender, RoutedEventArgs e)
+        {
+            string result = quizManager.StartQuiz();
+            quiz_output.Text = result;
+            quiz_answer_input.IsEnabled = true;
+            quiz_answer_input.Clear();
+            quiz_submit_btn.IsEnabled = true;
+            start_quiz_btn_ctrl.IsEnabled = false;
+        }
+
+        //Submit quiz answer button
+        private void submit_quiz_answer(object sender, RoutedEventArgs e)
+        {
+            string answer = quiz_answer_input.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(answer))
+                return;
+
+            string result = quizManager.SubmitAnswer(answer);
+            quiz_output.Text = result;
+            quiz_answer_input.Clear();
+
+            //If quiz ended, re-enable start button
+            if (!quizManager.IsActive)
+            {
+                quiz_answer_input.IsEnabled = false;
+                quiz_submit_btn.IsEnabled = false;
+                start_quiz_btn_ctrl.IsEnabled = true;
+            }
+        }
+
+        //Quit quiz button
+        private void quit_quiz_btn(object sender, RoutedEventArgs e)
+        {
+            quiz_output.Text = quizManager.QuitQuiz();
+            quiz_answer_input.IsEnabled = false;
+            quiz_submit_btn.IsEnabled = false;
+            start_quiz_btn_ctrl.IsEnabled = true;
+        }
+
+        //Activity log panel
+        private void RefreshActivityLog()
+        {
+            log_output.Text = activityLog.GetLogSummary();
+        }
+
+        //Refresh log button
+        private void refresh_log_btn(object sender, RoutedEventArgs e)
+        {
+            RefreshActivityLog();
+        }
 
     }//end of class
 }//end of namespace
