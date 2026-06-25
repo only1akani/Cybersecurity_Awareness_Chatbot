@@ -2,4 +2,3 @@ auto_create
 sds
 owen
 ak_ni
-AL_ak

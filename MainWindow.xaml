@@ -5,214 +5,139 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:demo"
         mc:Ignorable="d"
-        Title="Cybersecurity Awareness Chatbot" Height="600" Width="900">
-
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
 
-        <!-- HOME GRID -->
+        <!-- 
+            HOME GRID
+            This grid serves as the main landing page  of the application.
+            It contains a logo for AI , a welcome message to greet users,
+            and a navigation button to proceed to the next section.
+            Currently hidden by default.
+        -->
         <Grid x:Name="home_grid" Visibility="Visible">
 
-            <Image Source="/logo.png" Height="200" Width="300" Margin="0,0,0,200"/>
-
+            <!-- Logo -->
+            <Image 
+                Source="/logo.png" 
+                Height="200"
+                Width="300"
+                Margin="0,0,0,200"
+                   />
+            <!-- welcome message-->
             <TextBlock
                 Text="Welcome to AI chatbot, click continue button"
-                Height="20" Width="270"
+                Height="20"
+                Width="270"
                 TextAlignment="Center"
                 Margin="0,30,0,0"
-                FontFamily="Arial Rounded MT Bold"/>
+                FontFamily="Arial Rounded MT Bold"
+                />
 
-            <Button Height="40" Width="300" Margin="0,200,0,0"
-                    Content="Proceed" Click="proceed"/>
+            <!-- button to continue-->
+            <Button 
+                Height="40"
+                Width="300"
+                Margin="0,200,0,0"
+                Content="Proceed"
+                Click="proceed"
+                />
 
         </Grid>
 
-        <!-- USERNAME GRID -->
+        <!-- 
+            USERNAME GRID
+            This grid is for prompting the user for username.
+            It contains a logo for AI, a textbox for users to enter their name,
+            and a submit button to save the username.
+            Hidden .
+        -->
         <Grid x:Name="username_grid" Visibility="Hidden">
 
-            <Image Source="/logo.png" Height="200" Width="300" Margin="0,0,0,200"/>
 
-            <TextBlock Text="Enter username" Height="20" Width="270"
-                       TextAlignment="Justify" Margin="0,30,0,0"
-                       FontFamily="Arial Rounded MT Bold"/>
+            <!-- Logo -->
+            <Image 
+                Source="/logo.png" 
+                Height="200"
+                Width="300"
+                Margin="0,0,0,200"
+                   />
+            <!-- Hint message-->
+            <TextBlock
+                Text="Enter username"
+                Height="20"
+                Width="270"
+                TextAlignment="Justify"
+                Margin="0,30,0,0"
+                FontFamily="Arial Rounded MT Bold"
+                />
 
-            <TextBox x:Name="usernames_input" Height="40" Width="270"
-                     TextAlignment="Center" Margin="0,100,0,0"
-                     FontFamily="Arial Rounded MT Bold"/>
+            <!-- Enter/Prompt username-->
+            <TextBox
+                Height="40"
+                Width="270"
+                TextAlignment="Center"
+                Margin="0,100,0,0"
+                FontFamily="Arial Rounded MT Bold"
+                x:Name="usernames_input"
+                />
 
-            <TextBlock Text="please enter username to continue..."
-                       Height="20" Width="270" TextAlignment="Justify"
-                       Margin="0,180,0,0" Foreground="Red"
-                       FontFamily="Arial Rounded MT Bold"/>
+            <!-- error message-->
+            <TextBlock
+         Text="please enter username to continue..."
+         Height="20"
+         Width="270"
+         TextAlignment="Justify"
+         Margin="0,180,0,0"
+         Foreground="Red"
+         FontFamily="Arial Rounded MT Bold"
+         />
 
-            <Button Height="40" Width="270" Margin="0,250,0,0"
-                    Content="submit username" Click="submit_name"/>
+            <!-- button to submit name-->
+            <Button 
+        Height="40"
+        Width="270"
+        Margin="0,250,0,0"
+        Content="submit username"
+        Click="submit_name"
+        />
 
         </Grid>
 
-        <!-- CHAT GRID -->
+        <!-- 
+            CHAT GRID
+            This grid handles all messaging and conversation-related features of the application.
+            It contains a ListView to display chat messages, a textbox for typing questions,
+            and a submit button to send the question to the chat.
+            Starting in a hidden state.
+        -->
         <Grid x:Name="chat_grid" Visibility="Hidden">
 
-            <!-- Tab buttons -->
-            <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Top">
 
-                <Button Content="Chat" Width="160" Height="40"
-                        Click="show_chat_panel" FontFamily="Arial Rounded MT Bold"/>
+            <!-- List view to show messages show messages-->
+            <ListView  
+                x:Name="chats" 
+                Height="300"
+                Margin="0,0,0,120"
+                />
 
-                <Button Content="Task Assistant" Width="160" Height="40"
-                        Click="show_task_panel" FontFamily="Arial Rounded MT Bold"/>
 
-                <Button Content="Quiz" Width="160" Height="40"
-                        Click="show_quiz_panel" FontFamily="Arial Rounded MT Bold"/>
+            <!-- TextBox to prompt questions-->
+            <TextBox
+                x:Name="question"
+                Height="50"
+                Width="480"
+                Margin="0,300,300,0"
+                />
 
-                <Button Content="Activity Log" Width="160" Height="40"
-                        Click="show_log_panel" FontFamily="Arial Rounded MT Bold"/>
-
-            </StackPanel>
-
-            <!-- PANEL 1: CHAT -->
-            <Grid x:Name="chat_panel" Margin="0,45,0,0" Visibility="Visible">
-
-                <ListView x:Name="chats" Height="380"
-                          VerticalAlignment="Top" Margin="10,0,10,0"/>
-
-                <TextBox x:Name="question" Height="50" Width="580"
-                         HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                         Margin="10,0,0,10" FontFamily="Arial Rounded MT Bold"/>
-
-                <Button Height="50" Width="270" HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom" Margin="0,0,10,10"
-                        Content="Send" Click="send"
-                        FontFamily="Arial Rounded MT Bold"/>
-
-            </Grid>
-
-            <!-- PANEL 2: TASK ASSISTANT -->
-            <Grid x:Name="task_panel" Margin="0,45,0,0" Visibility="Hidden">
-
-                <TextBlock Text="Cybersecurity Task Assistant"
-                           Margin="10,5,0,0" Height="25"
-                           VerticalAlignment="Top" HorizontalAlignment="Left"
-                           FontFamily="Arial Rounded MT Bold" FontSize="14"/>
-
-                <TextBlock Text="Title:" Margin="10,25,0,0"
-                           VerticalAlignment="Top" HorizontalAlignment="Left"
-                           FontFamily="Arial Rounded MT Bold" FontSize="11"/>
-
-                <TextBlock Text="Description:" Margin="218,25,0,0"
-                           VerticalAlignment="Top" HorizontalAlignment="Left"
-                           FontFamily="Arial Rounded MT Bold" FontSize="11"/>
-
-                <TextBlock Text="Reminder:" Margin="476,25,0,0"
-                           VerticalAlignment="Top" HorizontalAlignment="Left"
-                           FontFamily="Arial Rounded MT Bold" FontSize="11"/>
-
-                <TextBox x:Name="task_title_input" Height="35" Width="200"
-                         HorizontalAlignment="Left" VerticalAlignment="Top"
-                         Margin="10,38,0,0" FontFamily="Arial Rounded MT Bold"
-                         ToolTip="e.g. Enable 2FA"/>
-
-                <TextBox x:Name="task_desc_input" Height="35" Width="250"
-                         HorizontalAlignment="Left" VerticalAlignment="Top"
-                         Margin="218,38,0,0" FontFamily="Arial Rounded MT Bold"
-                         ToolTip="Task description"/>
-
-                <TextBox x:Name="task_reminder_input" Height="35" Width="130"
-                         HorizontalAlignment="Left" VerticalAlignment="Top"
-                         Margin="476,38,0,0" FontFamily="Arial Rounded MT Bold"
-                         ToolTip="e.g. 3 days"/>
-
-                <Button Content="Add Task" Height="35" Width="110"
-                        HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Margin="614,38,0,0" Click="add_task_btn"
-                        FontFamily="Arial Rounded MT Bold"/>
-
-                <Button Content="Mark Complete" Height="35" Width="160"
-                        HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Margin="10,85,0,0" Click="mark_complete_btn"
-                        FontFamily="Arial Rounded MT Bold"/>
-
-                <Button Content="Delete Task" Height="35" Width="140"
-                        HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Margin="178,85,0,0" Click="delete_task_btn"
-                        FontFamily="Arial Rounded MT Bold"/>
-
-                <Label x:Name="task_status_label" Content=""
-                       HorizontalAlignment="Left" VerticalAlignment="Top"
-                       Margin="10,128,0,0" Height="22"
-                       FontFamily="Arial Rounded MT Bold" FontSize="11"
-                       Foreground="Green"/>
-
-                <ListView x:Name="tasks_listview" Margin="10,155,10,10">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="ID"          Width="40"  DisplayMemberBinding="{Binding Id}"/>
-                            <GridViewColumn Header="Title"       Width="180" DisplayMemberBinding="{Binding Title}"/>
-                            <GridViewColumn Header="Description" Width="260" DisplayMemberBinding="{Binding Description}"/>
-                            <GridViewColumn Header="Reminder"    Width="120" DisplayMemberBinding="{Binding Reminder}"/>
-                            <GridViewColumn Header="Done"        Width="70"  DisplayMemberBinding="{Binding IsCompleted}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-
-            </Grid>
-
-            <!-- PANEL 3: QUIZ -->
-            <Grid x:Name="quiz_panel" Margin="0,45,0,0" Visibility="Hidden">
-
-                <TextBlock Text="Cybersecurity Mini-Game Quiz"
-                           Margin="10,5,0,0" Height="25"
-                           VerticalAlignment="Top" HorizontalAlignment="Left"
-                           FontFamily="Arial Rounded MT Bold" FontSize="14"/>
-
-                <TextBox x:Name="quiz_output" Margin="10,38,10,120"
-                         IsReadOnly="True" TextWrapping="Wrap"
-                         FontFamily="Arial Rounded MT Bold" FontSize="13"
-                         VerticalScrollBarVisibility="Auto"
-                         Text="Press Start Quiz to begin the cybersecurity challenge!"/>
-
-                <TextBox x:Name="quiz_answer_input" Height="40" Width="560"
-                         HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                         Margin="10,0,0,68" FontFamily="Arial Rounded MT Bold"
-                         IsEnabled="False"/>
-
-                <Button x:Name="quiz_submit_btn" Content="Submit Answer"
-                        Height="40" Width="280" HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom" Margin="0,0,10,68"
-                        Click="submit_quiz_answer" FontFamily="Arial Rounded MT Bold"
-                        IsEnabled="False"/>
-
-                <Button x:Name="start_quiz_btn_ctrl" Content="Start Quiz"
-                        Height="40" Width="200" HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom" Margin="10,0,0,15"
-                        Click="start_quiz_btn" FontFamily="Arial Rounded MT Bold"/>
-
-                <Button Content="Quit Quiz" Height="40" Width="160"
-                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                        Margin="218,0,0,15" Click="quit_quiz_btn"
-                        FontFamily="Arial Rounded MT Bold"/>
-
-            </Grid>
-
-            <!-- PANEL 4: ACTIVITY LOG -->
-            <Grid x:Name="log_panel" Margin="0,45,0,0" Visibility="Hidden">
-
-                <TextBlock Text="Activity Log - Recent Chatbot Actions"
-                           Margin="10,5,0,0" Height="25"
-                           VerticalAlignment="Top" HorizontalAlignment="Left"
-                           FontFamily="Arial Rounded MT Bold" FontSize="14"/>
-
-                <TextBox x:Name="log_output" Margin="10,38,10,60"
-                         IsReadOnly="True" TextWrapping="Wrap"
-                         FontFamily="Arial Rounded MT Bold" FontSize="12"
-                         VerticalScrollBarVisibility="Auto"
-                         Text="No actions recorded yet."/>
-
-                <Button Content="Refresh Log" Height="38" Width="180"
-                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                        Margin="10,0,0,10" Click="refresh_log_btn"
-                        FontFamily="Arial Rounded MT Bold"/>
-
-            </Grid>
+            <!-- button to submit -->
+            <Button
+                Height="50"
+                Width="280"
+                Margin="490,300,0,0"
+                Content="send "
+                Click="send"
+                />
 
         </Grid>
 
