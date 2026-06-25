@@ -54,7 +54,7 @@ namespace demo
             return summary.TrimEnd('\n');
         }
 
-        //Returns total number of log entries recorded
+        //Returns total number of log entries recorded by user
         public int TotalEntries()
         {
             return _log.Count;
