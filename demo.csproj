@@ -55,11 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="activity_log.cs" />
     <Compile Include="chat_display.cs" />
     <Compile Include="chat_processor.cs" />
     <Compile Include="Input_cleaner.cs" />
     <Compile Include="interest_tracker.cs" />
+    <Compile Include="quiz_manager.cs" />
     <Compile Include="respond.cs" />
+    <Compile Include="task_manager.cs" />
     <Compile Include="user_name.cs" />
     <Compile Include="voice_greeting.cs" />
     <Page Include="MainWindow.xaml">
